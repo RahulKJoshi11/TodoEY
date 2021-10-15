@@ -1,0 +1,30 @@
+services:
+  tasklist:
+    build:
+      context: /Users/rahuljoshi/Desktop/Work/WebApplication Dot Net Core/TaskList
+      dockerfile: TaskList/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: TaskList
+    container_name: TaskList
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: tasklist
+    labels:
+      com.microsoft.visual-studio.project-name: TaskList
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/TaskList.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - /Users/rahuljoshi/vsdbg/vs2017u5:/remote_debugger:rw
+    - /Users/rahuljoshi/.aspnet/https:/root/.aspnet/https:ro
+    - /Users/rahuljoshi/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

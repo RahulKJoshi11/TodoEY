@@ -1,0 +1,16 @@
+services:
+  tasklist:
+    build:
+      context: /Users/rahuljoshi/Desktop/Work/WebApplication Dot Net Core/TaskList
+      dockerfile: TaskList/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: tasklist
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - /Users/rahuljoshi/.aspnet/https:/root/.aspnet/https:ro
+    - /Users/rahuljoshi/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

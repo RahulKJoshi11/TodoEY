@@ -1,0 +1,68 @@
+﻿@page
+@model TaskList.Pages.TaskPages.IndexModel
+@{
+    ViewData["Title"] = "Index T";
+}
+
+<h1>Hi @User.Identity.Name, here's is all you need ToDo</h1>
+
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-10">
+    </div>
+    <div class="col-2">
+        <a asp-page="Create" class="btn btn-info form-control text-white">Create a Task</a>
+    </div>
+
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            @if (Model.Tasks.Any())
+            {
+                <table class="table table-stripped border">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Tasks.FirstOrDefault().TaskName"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Tasks.FirstOrDefault().Description"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Tasks.FirstOrDefault().IsDone"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Tasks.FirstOrDefault().LastUpdatedDate"></label>
+                        </th>
+                        <th>
+                            <label>Delete/Edit</label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Tasks)
+                    {
+                <tr class="table-secondary">
+                    <td>
+                        @Html.DisplayFor(m => item.TaskName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.IsDone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.LastUpdatedDate)
+                    </td>
+                    <td>
+                        <a asp-route-id="@item.PK_Id" asp-page="Edit" class="btn btn-success btn-sm text-white">Edit</a>
+                        <button class="btn btn-danger btn-sm" asp-page-handler="Delete" onclick="return confirm('Are you sure you want to delete the record?')" asp-route-id="@item.PK_Id">Delete</button>
+                    </td>
+                </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No tasks available.</p>
+            }
+        </form>
+    </div>
+</div>
