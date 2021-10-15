@@ -14,6 +14,8 @@ When the application is run a landing page opens to create a TODO list. Below ar
 7.	Each task is displaying the date of Last Updates and description
 8.	All changes can be persistent to allow to view them with page refresh.
 9.	User can Logout.
+
+
 Approaches and architecture Used: 
 Used ASP.net Core 3.1 as the framework, C# as coding language, SQLite as database( In-memory Database), for developing the app. I have used razor pages to create the app and cookie -based authentication in Login. I have used entity framework code first approach to communicate with the database, and the database is in memory database, so it is created dynamically once the connection is open that is when application starts, and dropped once it is closed.
 I have used Razor pages instead of MVC because of its simpler implementation which makes it ideal for smaller applications.
